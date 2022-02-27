@@ -32,7 +32,7 @@ class FirstFragment : Fragment() {
         }
         listAdapter.addAll(list)
         val fbAdapter: FBNativeAdAdapter = FBNativeAdAdapter.Builder
-            .with("321357575164976_321357668498300", listAdapter)
+            .with("424421591789497_990179275213723", listAdapter)
             .build()
         binding.recycleview.adapter = fbAdapter
 
