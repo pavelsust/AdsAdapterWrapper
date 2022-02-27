@@ -3,6 +3,7 @@ package com.rockstreamer.adsadapterwrapper.controller
 import android.app.Application
 import androidx.multidex.MultiDex
 import com.facebook.ads.AudienceNetworkAds
+import com.google.android.gms.ads.MobileAds
 
 class AppController :Application(){
 
@@ -10,5 +11,6 @@ class AppController :Application(){
         super.onCreate()
         MultiDex.install(this)
         AudienceNetworkAds.initialize(this)
+        MobileAds.initialize(this)
     }
 }

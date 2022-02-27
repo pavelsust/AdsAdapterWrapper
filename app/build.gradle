@@ -50,5 +50,6 @@ dependencies {
     implementation project(':adsmodule')
     implementation("androidx.multidex:multidex:2.0.1")
     implementation 'com.facebook.android:audience-network-sdk:6.+'
+    implementation 'com.google.android.gms:play-services-ads:20.6.0' // Google Ads
 
 }
