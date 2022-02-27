@@ -19,23 +19,22 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.nativead.NativeAdOptions;
 
-/**
- * Created by thuanle on 2/12/17.
- */
-public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
+public class AdmobBannerAdAdapter extends RecyclerViewAdapterWrapper{
 
-    private static final int TYPE_FB_NATIVE_ADS = 900;
-    private static final int DEFAULT_AD_ITEM_INTERVAL = 4;
+    private static final int TYPE_ADMOB_BANNER_ADS = 900;
+    private static final int DEFAULT_AD_ITEM_INTERVAL =4;
 
     private final Param mParam;
 
-    private AdmobNativeAdAdapter(Param param) {
+
+    public AdmobBannerAdAdapter(Param param) {
         super(param.adapter);
         this.mParam = param;
 
         assertConfig();
         setSpanAds();
     }
+
 
     private void assertConfig() {
         if (mParam.gridLayoutManager != null) {
@@ -61,7 +60,7 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
     @Override
     public int getItemViewType(int position) {
         if (isAdPosition(position)) {
-            return TYPE_FB_NATIVE_ADS;
+            return TYPE_ADMOB_BANNER_ADS;
         }
         return super.getItemViewType(convertAdPosition2OrgPosition(position));
     }
@@ -72,7 +71,7 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
     }
 
     private void onBindAdViewHolder(final RecyclerView.ViewHolder holder) {
-        final AdViewHolder adHolder = (AdViewHolder) holder;
+        final AdmobNativeAdAdapter.AdViewHolder adHolder = (AdmobNativeAdAdapter.AdViewHolder) holder;
         if (mParam.forceReloadAdOnBind || !adHolder.loaded) {
             AdLoader adLoader = new AdLoader.Builder(adHolder.getContext(), mParam.admobNativeId)
                     .forNativeAd(NativeAd -> {
@@ -138,7 +137,7 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position) == TYPE_FB_NATIVE_ADS) {
+        if (getItemViewType(position) == TYPE_ADMOB_BANNER_ADS) {
             onBindAdViewHolder(holder);
         } else {
             super.onBindViewHolder(holder, convertAdPosition2OrgPosition(position));
@@ -154,12 +153,12 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
         LinearLayout adLayoutContent = (LinearLayout) inflater.inflate(R.layout.item_admob_native_ad, parent, false);
         vg.addView(adLayoutContent);
 
-        return new AdViewHolder(adLayoutOutline);
+        return new AdmobNativeAdAdapter.AdViewHolder(adLayoutOutline);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_FB_NATIVE_ADS) {
+        if (viewType == TYPE_ADMOB_BANNER_ADS) {
             return onCreateAdViewHolder(parent);
         }
         return super.onCreateViewHolder(parent, viewType);
@@ -181,6 +180,22 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
         });
     }
 
+    private static class Param {
+        String admobNativeId;
+        RecyclerView.Adapter adapter;
+        int adItemInterval;
+        boolean forceReloadAdOnBind;
+
+        int layout;
+
+        @LayoutRes
+        int itemContainerLayoutRes;
+
+        @IdRes
+        int itemContainerId;
+
+        GridLayoutManager gridLayoutManager;
+    }
 
 
     public static class Builder {
@@ -190,7 +205,7 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
             mParam = param;
         }
 
-        public static Builder with(String placementId, RecyclerView.Adapter wrapped, String layout) {
+        public static AdmobNativeAdAdapter.Builder with(String placementId, RecyclerView.Adapter wrapped, String layout) {
             Param param = new Param();
             param.admobNativeId = placementId;
             param.adapter = wrapped;
@@ -210,15 +225,15 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
             param.itemContainerLayoutRes = R.layout.item_admob_native_ad_outline;
             param.itemContainerId = R.id.ad_container;
             param.forceReloadAdOnBind = true;
-            return new Builder(param);
+            return new AdmobNativeAdAdapter.Builder(param);
         }
 
-        public Builder adItemInterval(int interval) {
+        public AdmobNativeAdAdapter.Builder adItemInterval(int interval) {
             mParam.adItemInterval = interval;
             return this;
         }
 
-        public Builder adLayout(@LayoutRes int layoutContainerRes, @IdRes int itemContainerId) {
+        public AdmobNativeAdAdapter.Builder adLayout(@LayoutRes int layoutContainerRes, @IdRes int itemContainerId) {
             mParam.itemContainerLayoutRes = layoutContainerRes;
             mParam.itemContainerId = itemContainerId;
             return this;
@@ -228,27 +243,27 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
             return new AdmobNativeAdAdapter(mParam);
         }
 
-        public Builder enableSpanRow(GridLayoutManager layoutManager) {
+        public AdmobNativeAdAdapter.Builder enableSpanRow(GridLayoutManager layoutManager) {
             mParam.gridLayoutManager = layoutManager;
             return this;
         }
-        public Builder adItemIterval(int i) {
+        public AdmobNativeAdAdapter.Builder adItemIterval(int i) {
             mParam.adItemInterval=i;
             return this;
         }
 
-        public Builder forceReloadAdOnBind(boolean forced) {
+        public AdmobNativeAdAdapter.Builder forceReloadAdOnBind(boolean forced) {
             mParam.forceReloadAdOnBind = forced;
             return this;
         }
     }
 
-    private static class AdViewHolder extends RecyclerView.ViewHolder {
+    private static class BannerAdViewHolder extends RecyclerView.ViewHolder {
 
         TemplateView templatesmall,templatemedium,templatecustom;
         LinearLayout adContainer;
         boolean loaded;
-        AdViewHolder(View view) {
+        BannerAdViewHolder(View view) {
             super(view);
             templatesmall=view.findViewById(R.id.my_templatesmall);
             templatecustom=view.findViewById(R.id.my_templatecustom);
