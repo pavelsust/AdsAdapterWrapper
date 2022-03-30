@@ -10,6 +10,7 @@ import com.rockstreamer.adsadapterwrapper.databinding.FragmentFirstBinding
 import com.rockstreamer.adsmodule.AdmobBannerAdAdapter
 import com.rockstreamer.adsmodule.FacebookBannerAdAdapter
 import com.rockstreamer.adsmodule.FacebookNativeAdAdapter
+import com.rockstreamer.adsmodule.FacebookNativeBannerAdsAdapter
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -39,14 +40,14 @@ class FirstFragment : Fragment() {
         listAdapter.addAll(list)
 
 
-        val facebookAdapter: FacebookNativeAdAdapter = FacebookNativeAdAdapter.Builder
-            .with("424421591789497_990179275213723", 5, listAdapter)
+        val facebookAdapter: FacebookNativeBannerAdsAdapter = FacebookNativeBannerAdsAdapter.Builder
+            .with("381521685984607_381553192648123", 5, listAdapter)
             .build()
 
 
         val admobNativeAdAdapter = FacebookBannerAdAdapter.Builder.with(requireActivity(),"381521685984607_1157867285016706", listAdapter,
-            "medium"
         ).adItemInterval(3).build()
+
         binding.recycleview.adapter = admobNativeAdAdapter
 
         return binding.root

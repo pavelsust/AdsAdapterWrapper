@@ -82,7 +82,7 @@ public class FacebookBannerAdAdapter extends RecyclerViewAdapterWrapper {
         if (getItemViewType(position) == TYPE_FB_NATIVE_ADS) {
             final AdmobBannerHolder admobBannerHolder = (AdmobBannerHolder) holder;
 
-           com.facebook.ads.AdView adView = new AdView(mParam.context , ""+mParam.admobNativeId , AdSize.BANNER_HEIGHT_90);
+           com.facebook.ads.AdView adView = new AdView(mParam.context , ""+mParam.admobNativeId , AdSize.BANNER_320_50);
             admobBannerHolder.frameLayout.addView(adView);
             adView.loadAd();
 
@@ -106,7 +106,7 @@ public class FacebookBannerAdAdapter extends RecyclerViewAdapterWrapper {
             this.mParam = param;
         }
 
-        public static Builder with(Context context , String placementId, RecyclerView.Adapter wrapped, String layout){
+        public static Builder with(Context context , String placementId, RecyclerView.Adapter wrapped){
             Param param = new Param();
             param.admobNativeId = placementId;
             param.adapter = wrapped;
