@@ -150,7 +150,7 @@ public class AdmobBannerAdAdapter extends RecyclerViewAdapterWrapper {
             this.mParam = param;
         }
 
-        public static Builder with(Context context , String placementId, RecyclerView.Adapter wrapped, String layout){
+        public static Builder with(Context context , String placementId, RecyclerView.Adapter wrapped){
             Param param = new Param();
             param.admobNativeId = placementId;
             param.adapter = wrapped;
