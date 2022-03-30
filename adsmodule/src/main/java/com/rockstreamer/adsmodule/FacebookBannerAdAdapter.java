@@ -1,7 +1,6 @@
 package com.rockstreamer.adsmodule;
 
 import android.content.Context;
-import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -10,14 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
+
+
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
 
-public class AdmobBannerAdAdapter extends RecyclerViewAdapterWrapper {
+
+public class FacebookBannerAdAdapter extends RecyclerViewAdapterWrapper {
 
     private static final int TYPE_FB_NATIVE_ADS = 900;
     private static final int DEFAULT_AD_ITEM_INTERVAL = 4;
@@ -25,7 +26,7 @@ public class AdmobBannerAdAdapter extends RecyclerViewAdapterWrapper {
     private final Param mParam;
 
 
-    private AdmobBannerAdAdapter(Param param){
+    private FacebookBannerAdAdapter(Param param){
         super(param.adapter);
         this.mParam = param;
         assertConfig();
@@ -75,60 +76,15 @@ public class AdmobBannerAdAdapter extends RecyclerViewAdapterWrapper {
         return super.onCreateViewHolder(parent, viewType);
     }
 
-    private AdSize getAdSize() {
-
-        WindowManager wm = (WindowManager) mParam.context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        display.getMetrics(outMetrics);
-
-        float widthPixels = outMetrics.widthPixels;
-        float density = outMetrics.density;
-        int adWidth = (int) (widthPixels / density);
-        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(mParam.context, adWidth);
-
-    }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_FB_NATIVE_ADS) {
             final AdmobBannerHolder admobBannerHolder = (AdmobBannerHolder) holder;
 
-            AdView adView = new AdView(admobBannerHolder.frameLayout.getContext());
-            adView.setAdUnitId(mParam.admobNativeId);
-            adView.setAdSize(getAdSize());
-            adView.loadAd(new AdRequest.Builder().build());
+           com.facebook.ads.AdView adView = new AdView(mParam.context , ""+mParam.admobNativeId , AdSize.BANNER_HEIGHT_90);
             admobBannerHolder.frameLayout.addView(adView);
-
-
-            adView.setAdListener(new AdListener() {
-                @Override
-                public void onAdLoaded() {
-                    Log.d("ADMOB" , "Ads loaded");
-                }
-
-                @Override
-                public void onAdFailedToLoad(LoadAdError adError) {
-                    Log.d("ADMOB" , "Ads error "+adError.toString());
-                }
-
-                @Override
-                public void onAdOpened() {
-                    // Code to be executed when an ad opens an overlay that
-                    // covers the screen.
-                }
-
-                @Override
-                public void onAdClicked() {
-                    // Code to be executed when the user clicks on an ad.
-                }
-
-                @Override
-                public void onAdClosed() {
-                    // Code to be executed when the user is about to return
-                    // to the app after tapping on an ad.
-                }
-            });
+            adView.loadAd();
 
         } else {
             super.onBindViewHolder(holder, convertAdPosition2OrgPosition(position));
@@ -167,8 +123,8 @@ public class AdmobBannerAdAdapter extends RecyclerViewAdapterWrapper {
             return this;
         }
 
-        public AdmobBannerAdAdapter build() {
-            return new AdmobBannerAdAdapter(mParam);
+        public FacebookBannerAdAdapter build() {
+            return new FacebookBannerAdAdapter(mParam);
         }
     }
 }

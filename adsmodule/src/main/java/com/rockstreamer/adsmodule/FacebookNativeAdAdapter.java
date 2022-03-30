@@ -26,14 +26,14 @@ import com.facebook.ads.NativeAdListener;
  * Created by thuanle on 2/12/17.
  */
 
-public class FBNativeAdAdapter extends RecyclerViewAdapterWrapper {
+public class FacebookNativeAdAdapter extends RecyclerViewAdapterWrapper {
 
     private static final int TYPE_FB_NATIVE_ADS = 900;
     private static final int DEFAULT_AD_ITEM_INTERVAL = 10;
 
     private final Param mParam;
 
-    private FBNativeAdAdapter(Param param) {
+    private FacebookNativeAdAdapter(Param param) {
         super(param.adapter);
         this.mParam = param;
 
@@ -100,21 +100,12 @@ public class FBNativeAdAdapter extends RecyclerViewAdapterWrapper {
                     adHolder.nativeAdBody.setText(nativeAd.getAdBodyText());
                     adHolder.nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
 
-                    // Download and display the cover image.
-                    //adHolder.nativeAdMedia.setNativeAd(nativeAd);
-                    //adHolder.nativeAdMedia.addView(nativeAd);
-
                     // Add the AdChoices icon
                     AdOptionsView adChoicesView = new AdOptionsView(adHolder.getContext(), nativeAd, null);
                     adHolder.adChoicesContainer.removeAllViews();
                     adHolder.adChoicesContainer.addView(adChoicesView);
 
-                    // Register the Title and CTA button to listen for clicks.
-                    //adHolder.nativeAdMedia.addView(adHolder.nativeAdTitle);
-                    //adHolder.nativeAdMedia.addView(adHolder.nativeAdCallToAction);
-
                     nativeAd.registerViewForInteraction(adHolder.nativeAdContainer, adHolder.nativeAdMedia, adHolder.nativeAdIcon);
-
                     adHolder.loaded = true;
                 }
 
@@ -234,8 +225,8 @@ public class FBNativeAdAdapter extends RecyclerViewAdapterWrapper {
             return this;
         }
 
-        public FBNativeAdAdapter build() {
-            return new FBNativeAdAdapter(mParam);
+        public FacebookNativeAdAdapter build() {
+            return new FacebookNativeAdAdapter(mParam);
         }
 
         public Builder enableSpanRow(GridLayoutManager layoutManager) {

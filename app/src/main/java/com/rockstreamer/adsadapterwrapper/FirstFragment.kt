@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rockstreamer.adsadapterwrapper.databinding.FragmentFirstBinding
 import com.rockstreamer.adsmodule.AdmobBannerAdAdapter
-import com.rockstreamer.adsmodule.AdmobNativeAdAdapter
-import com.rockstreamer.adsmodule.FBNativeAdAdapter
+import com.rockstreamer.adsmodule.FacebookBannerAdAdapter
+import com.rockstreamer.adsmodule.FacebookNativeAdAdapter
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -40,14 +39,14 @@ class FirstFragment : Fragment() {
         listAdapter.addAll(list)
 
 
-        val fbAdapter: FBNativeAdAdapter = FBNativeAdAdapter.Builder
+        val facebookAdapter: FacebookNativeAdAdapter = FacebookNativeAdAdapter.Builder
             .with("424421591789497_990179275213723", 5, listAdapter)
             .build()
 
 
-        val admobNativeAdAdapter = AdmobBannerAdAdapter.Builder.with("ca-app-pub-3940256099942544/2247696110", listAdapter,
+        val admobNativeAdAdapter = FacebookBannerAdAdapter.Builder.with(requireActivity(),"381521685984607_1157867285016706", listAdapter,
             "medium"
-        ).adItemInterval(5).build()
+        ).adItemInterval(3).build()
         binding.recycleview.adapter = admobNativeAdAdapter
 
         return binding.root

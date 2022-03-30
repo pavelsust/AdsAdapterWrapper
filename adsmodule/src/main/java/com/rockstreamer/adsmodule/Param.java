@@ -1,5 +1,7 @@
 package com.rockstreamer.adsmodule;
 
+import android.content.Context;
+
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -11,6 +13,7 @@ public class Param {
     RecyclerView.Adapter adapter;
     int adItemInterval;
     boolean forceReloadAdOnBind;
+    Context context;
 
     int layout;
 
