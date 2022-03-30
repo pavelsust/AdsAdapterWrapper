@@ -12,15 +12,13 @@ import android.widget.TextView;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
-import com.facebook.ads.AdOptionsView;
 import com.facebook.ads.MediaView;
-import com.facebook.ads.NativeAd;
-import com.facebook.ads.NativeAdLayout;
 import com.facebook.ads.NativeAdListener;
 import com.facebook.ads.NativeBannerAd;
 
@@ -78,7 +76,7 @@ public class FacebookNativeBannerAdsAdapter extends RecyclerViewAdapterWrapper {
     private void onBindAdViewHolder(final RecyclerView.ViewHolder holder) {
         final AdViewHolder adHolder = (AdViewHolder) holder;
 
-        NativeBannerAd nativeBannerAd = new NativeBannerAd(adHolder.getContext(), "381521685984607_381553192648123");
+        NativeBannerAd nativeBannerAd = new NativeBannerAd(adHolder.getContext(), ""+mParam.facebookPlacementId);
         NativeAdListener nativeAdListener = new NativeAdListener() {
             @Override
             public void onMediaDownloaded(Ad ad) {
@@ -103,6 +101,9 @@ public class FacebookNativeBannerAdsAdapter extends RecyclerViewAdapterWrapper {
                 adHolder.nativeAdCallToAction.setVisibility(
                         nativeBannerAd.hasCallToAction() ? View.VISIBLE : View.INVISIBLE);
                 adHolder.nativeAdTitle.setText(nativeBannerAd.getAdvertiserName());
+
+
+
                 adHolder.nativeAdSocialContext.setText(nativeBannerAd.getAdSocialContext());
 
                 List<View> clickableViews = new ArrayList<>();
@@ -145,8 +146,7 @@ public class FacebookNativeBannerAdsAdapter extends RecyclerViewAdapterWrapper {
                 .inflate(mParam.itemContainerLayoutRes, parent, false);
         ViewGroup vg = adLayoutOutline.findViewById(mParam.itemContainerId);
 
-        LinearLayout adLayoutContent = (LinearLayout) inflater
-                .inflate(R.layout.item_native_facebook_banner_child, parent, false);
+        CardView adLayoutContent = (CardView) inflater.inflate(R.layout.item_native_facebook_banner_child, parent, false);
         vg.addView(adLayoutContent);
         return new AdViewHolder(adLayoutOutline);
     }
