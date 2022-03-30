@@ -48,7 +48,6 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
     }
 
     private int convertAdPosition2OrgPosition(int position) {
-
         return position - (position + 1) / (mParam.adItemInterval + 1);
     }
 
@@ -76,10 +75,6 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
         if (mParam.forceReloadAdOnBind || !adHolder.loaded) {
             AdLoader adLoader = new AdLoader.Builder(adHolder.getContext(), mParam.admobNativeId)
                     .forNativeAd(NativeAd -> {
-                        /*NativeTemplateStyle styles = new
-                                NativeTemplateStyle.Builder().withMainBackgroundColor().build();*/
-
-                        //adHolder.template.setStyles(styles);
 
                         Log.e("admobnative","loaded");
                         NativeTemplateStyle.Builder builder=new NativeTemplateStyle.Builder();
@@ -87,7 +82,6 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
                         builder.withSecondaryTextSize(10f);
                         builder.withTertiaryTextSize(06f);
                         builder.withCallToActionTextSize(11f);
-
 
                         if(mParam.layout==0){
                             adHolder.templatesmall.setVisibility(View.VISIBLE);
@@ -109,14 +103,6 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
 
                     })
                     .withAdListener(new AdListener() {
-//                        @Override
-//                        public void onAdFailedToLoad(int errorCode) {
-//                            Log.e("admobnative","error:"+errorCode);
-//                            adHolder.adContainer.setVisibility(View.GONE);
-//                            // Handle the failure by logging, altering the UI, and so on.
-//
-//                        }
-
 
                                         @Override
                                         public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {

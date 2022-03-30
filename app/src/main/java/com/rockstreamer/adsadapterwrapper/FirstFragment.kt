@@ -8,12 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rockstreamer.adsadapterwrapper.databinding.FragmentFirstBinding
+import com.rockstreamer.adsmodule.AdmobBannerAdAdapter
 import com.rockstreamer.adsmodule.AdmobNativeAdAdapter
 import com.rockstreamer.adsmodule.FBNativeAdAdapter
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
+
+
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
@@ -42,7 +45,7 @@ class FirstFragment : Fragment() {
             .build()
 
 
-        val admobNativeAdAdapter = AdmobNativeAdAdapter.Builder.with("ca-app-pub-3940256099942544/2247696110", listAdapter,
+        val admobNativeAdAdapter = AdmobBannerAdAdapter.Builder.with("ca-app-pub-3940256099942544/2247696110", listAdapter,
             "medium"
         ).adItemInterval(5).build()
         binding.recycleview.adapter = admobNativeAdAdapter
