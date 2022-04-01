@@ -25,7 +25,7 @@ import java.util.List;
 public class FacebookNativeBannerAdsAdapter extends RecyclerViewAdapterWrapper {
 
     private static final int TYPE_FB_NATIVE_ADS = 900;
-    private static final int DEFAULT_AD_ITEM_INTERVAL = 10;
+    private static final int DEFAULT_AD_ITEM_INTERVAL = 5;
 
     private final Param mParam;
 
@@ -193,13 +193,13 @@ public class FacebookNativeBannerAdsAdapter extends RecyclerViewAdapterWrapper {
             mParam = param;
         }
 
-        public static Builder with(String placementId, int adsInterval,RecyclerView.Adapter wrapped) {
+        public static Builder with(String placementId,RecyclerView.Adapter wrapped) {
             Param param = new Param();
             param.facebookPlacementId = placementId;
             param.adapter = wrapped;
 
             //default value
-            param.adItemInterval = adsInterval;
+            param.adItemInterval = DEFAULT_AD_ITEM_INTERVAL;
             param.itemContainerLayoutRes = R.layout.item_facebook_native_banner;
             param.itemContainerId = R.id.native_banner_ad_container;
             param.forceReloadAdOnBind = true;
