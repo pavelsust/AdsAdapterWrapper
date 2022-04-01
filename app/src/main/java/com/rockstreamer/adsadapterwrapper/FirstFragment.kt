@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rockstreamer.adsadapterwrapper.databinding.FragmentFirstBinding
+import com.rockstreamer.adsadapterwrapper.databinding.FragmentSecondBinding
 import com.rockstreamer.adsmodule.AdmobBannerAdAdapter
 import com.rockstreamer.adsmodule.FacebookBannerAdAdapter
 import com.rockstreamer.adsmodule.FacebookNativeAdAdapter
@@ -19,36 +21,38 @@ import com.rockstreamer.adsmodule.FacebookNativeBannerAdsAdapter
 
 class FirstFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var listAdapter : ListAdapter
-    private var list: MutableList<String> = ArrayList()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        binding.recycleview.layoutManager = LinearLayoutManager(requireActivity())
+        _binding = FragmentSecondBinding.inflate(inflater, container, false)
 
 
-        listAdapter = ListAdapter()
-        for (i in 1..50){
-            list.add("Item Number is $i")
+        binding.buttonAdmobBanner.setOnClickListener {
+            findNavController().navigate(R.id.action_firstFragment_to_admobBannerIntoAdapter)
         }
-        listAdapter.addAll(list)
 
+        binding.admobNative.setOnClickListener {
+            findNavController().navigate(R.id.action_firstFragment_to_admobNativeIntoAdapter)
+        }
 
-        val facebookAdapter: FacebookNativeBannerAdsAdapter = FacebookNativeBannerAdsAdapter.Builder
-            .with("381521685984607_381553192648123", 5, listAdapter)
-            .build()
+        binding.facebookBanner.setOnClickListener {
+            findNavController().navigate(R.id.action_firstFragment_to_facebookBannerIntoAdapter)
+        }
 
+        binding.facebookNative.setOnClickListener {
+            findNavController().navigate(R.id.action_firstFragment_to_facebookNativeIntoAdapter)
+        }
 
-        val admobNativeAdAdapter = FacebookBannerAdAdapter.Builder.with(requireActivity(),"381521685984607_1157867285016706", listAdapter,
-        ).adItemInterval(3).build()
+        binding.facebookNativeBanner.setOnClickListener {
+            findNavController().navigate(R.id.action_firstFragment_to_facebookNativeBanner)
+        }
 
-        binding.recycleview.adapter = admobNativeAdAdapter
 
         return binding.root
     }

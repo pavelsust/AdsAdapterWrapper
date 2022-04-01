@@ -9,10 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
@@ -82,9 +86,31 @@ public class FacebookBannerAdAdapter extends RecyclerViewAdapterWrapper {
         if (getItemViewType(position) == TYPE_FB_NATIVE_ADS) {
             final AdmobBannerHolder admobBannerHolder = (AdmobBannerHolder) holder;
 
-           com.facebook.ads.AdView adView = new AdView(mParam.context , ""+mParam.admobNativeId , AdSize.BANNER_320_50);
+            com.facebook.ads.AdView adView = new AdView(mParam.context , ""+mParam.admobNativeId , AdSize.BANNER_320_50);
             admobBannerHolder.frameLayout.addView(adView);
-            adView.loadAd();
+
+            AdListener adListener = new AdListener() {
+                @Override
+                public void onError(Ad ad, AdError adError) {
+                    admobBannerHolder.frameLayout.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAdLoaded(Ad ad) {
+                    admobBannerHolder.frameLayout.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAdClicked(Ad ad) {
+
+                }
+
+                @Override
+                public void onLoggingImpression(Ad ad) {
+
+                }
+            };
+            adView.loadAd(adView.buildLoadAdConfig().withAdListener(adListener).build());
 
         } else {
             super.onBindViewHolder(holder, convertAdPosition2OrgPosition(position));

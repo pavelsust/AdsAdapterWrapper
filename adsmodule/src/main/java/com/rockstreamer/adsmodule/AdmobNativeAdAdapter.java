@@ -75,8 +75,8 @@ public class AdmobNativeAdAdapter extends RecyclerViewAdapterWrapper {
         if (mParam.forceReloadAdOnBind || !adHolder.loaded) {
             AdLoader adLoader = new AdLoader.Builder(adHolder.getContext(), mParam.admobNativeId)
                     .forNativeAd(NativeAd -> {
+                        adHolder.adContainer.setVisibility(View.VISIBLE);
 
-                        Log.e("admobnative","loaded");
                         NativeTemplateStyle.Builder builder=new NativeTemplateStyle.Builder();
                         builder.withPrimaryTextSize(11f);
                         builder.withSecondaryTextSize(10f);

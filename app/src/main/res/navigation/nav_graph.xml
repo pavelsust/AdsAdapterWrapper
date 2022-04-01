@@ -3,15 +3,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/firstFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.rockstreamer.adsadapterwrapper.view.FacebookNativeIntoAdapter"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/admobBannerIntoAdapter"
+        tools:layout="@layout/fragment_first"
+        android:name="com.rockstreamer.adsadapterwrapper.view.AdmobBannerIntoAdapter"
+        android:label="AdmobBannerIntoAdapter">
 
     </fragment>
+
+    <fragment
+        android:id="@+id/admobNativeIntoAdapter"
+        tools:layout="@layout/fragment_first"
+        android:name="com.rockstreamer.adsadapterwrapper.view.AdmobNativeIntoAdapter"
+        android:label="AdmobNativeIntoAdapter" />
+
+    <fragment
+        android:id="@+id/facebookBannerIntoAdapter"
+        tools:layout="@layout/fragment_first"
+        android:name="com.rockstreamer.adsadapterwrapper.view.FacebookBannerIntoAdapter"
+        android:label="FacebookBannerIntoAdapter" />
+
+    <fragment
+        android:id="@+id/facebookNativeBanner"
+        tools:layout="@layout/fragment_first"
+        android:name="com.rockstreamer.adsadapterwrapper.view.FacebookNativeBanner"
+        android:label="FacebookNativeBanner" >
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.rockstreamer.adsadapterwrapper.FirstFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_second" >
+        <action
+            android:id="@+id/action_firstFragment_to_facebookNativeBanner"
+            app:destination="@id/facebookNativeBanner" />
+        <action
+            android:id="@+id/action_firstFragment_to_facebookNativeIntoAdapter"
+            app:destination="@id/facebookNativeIntoAdapter" />
+        <action
+            android:id="@+id/action_firstFragment_to_admobNativeIntoAdapter"
+            app:destination="@id/admobNativeIntoAdapter" />
+        <action
+            android:id="@+id/action_firstFragment_to_facebookBannerIntoAdapter"
+            app:destination="@id/facebookBannerIntoAdapter" />
+        <action
+            android:id="@+id/action_firstFragment_to_admobBannerIntoAdapter"
+            app:destination="@id/admobBannerIntoAdapter" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/facebookNativeIntoAdapter"
+        tools:layout="@layout/fragment_first"
+        android:name="com.rockstreamer.adsadapterwrapper.view.FacebookNativeIntoAdapter"
+        android:label="FacebookNativeIntoAdapter" />
 
 
 </navigation>

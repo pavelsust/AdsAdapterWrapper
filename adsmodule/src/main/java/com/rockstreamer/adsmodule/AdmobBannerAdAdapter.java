@@ -105,11 +105,13 @@ public class AdmobBannerAdAdapter extends RecyclerViewAdapterWrapper {
                 @Override
                 public void onAdLoaded() {
                     Log.d("ADMOB" , "Ads loaded");
+                    admobBannerHolder.frameLayout.setVisibility(View.VISIBLE);
                 }
 
                 @Override
                 public void onAdFailedToLoad(LoadAdError adError) {
                     Log.d("ADMOB" , "Ads error "+adError.toString());
+                    admobBannerHolder.frameLayout.setVisibility(View.GONE);
                 }
 
                 @Override
