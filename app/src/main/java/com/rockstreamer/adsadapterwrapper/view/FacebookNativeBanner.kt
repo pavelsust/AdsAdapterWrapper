@@ -42,7 +42,7 @@ class FacebookNativeBanner : Fragment() {
          */
 
 
-        val facebookNativeBanner = FacebookNativeBannerAdsAdapter.Builder.with("381521685984607_1157867285016706" , listAdapter)
+        val facebookNativeBanner = FacebookNativeBannerAdsAdapter.Builder.with("381521685984607_381553192648123" , listAdapter)
             .adItemInterval(5).build()
 
         binding.recycleview.adapter = facebookNativeBanner
