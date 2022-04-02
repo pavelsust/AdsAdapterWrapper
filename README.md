@@ -38,4 +38,27 @@ The main feature of this library is
  </table>
 
 
+## Install
+
+Add this dependency in your `build.gradle`: 
+
+
+```groovy
+allprojects {
+	repositories {
+		maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
+
+```xml
+dependencies {
+    	implementation 'com.github.pavelsust:AdsAdapterWrapper:1.0.4'
+}
+```
+
+
+
+
 
