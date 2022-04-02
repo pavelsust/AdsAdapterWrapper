@@ -144,3 +144,8 @@ val admobBanner = AdmobBannerAdAdapter.Builder.with(requireActivity() , "AD UNIT
 ```
  
 
+
+License
+=======
+
+Licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
