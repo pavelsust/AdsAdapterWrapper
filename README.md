@@ -54,11 +54,93 @@ allprojects {
 
 ```xml
 dependencies {
-    	implementation 'com.github.pavelsust:AdsAdapterWrapper:1.0.4'
+    implementation 'com.github.pavelsust:AdsAdapterWrapper:1.0.4'
+    implementation 'com.facebook.android:audience-network-sdk:6.+'  // facebook ads
+    implementation 'com.google.android.gms:play-services-ads:20.6.0' // Google Ads
 }
 ```
 
 
 
+```java
 
+public class AppController extends Application {
+
+    App app;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+	 AudienceNetworkAds.initialize(this)
+         MobileAds.initialize(this)
+    }
+}
+```
+
+ -> Add Internet permissions and Application class in your Androidmanifest 
+
+```xml
+
+<uses-permission android:name="android.permission.INTERNET" />
+ <application>
+        android:name=".AppController"
+         ......................
+	 ......................
+    </application>
+ ```
+ 
+ 
+  ### For Admob Banner Adapter 
+ 
+ ```java
+val admobBanner = AdmobBannerAdAdapter.Builder.with(requireActivity() , "AD UNIT ID", your adapter)
+            .adItemInterval(5).build()
+        binding.recycleview.adapter = admobBanner
+```
+ 
+ 
+  ### For Admob Native Adapter 
+ 
+ // Here we have two type view 
+  * medium
+  * small
+ 
+ ```java
+    val admobNative = AdmobNativeAdAdapter.Builder.with("AD UNIT ID", your adapter, "medium")
+            .adItemInterval(5).build()
+        binding.recycleview.adapter = admobNative
+```
+ 
+ 
+ 
+ ### For Facebook Banner
+ 
+ 
+ ```java
+ 
+        val facebookBanner = FacebookBannerAdAdapter.Builder.with(requireActivity() , "FACEBOOK BANNER AD ID" , Your adapter)
+            .adItemInterval(5).build()
+        binding.recycleview.adapter = facebookBanner
+```
+ 
+ 
+ ### For Facebook Native
+ 
+ 
+ ```java
+ 
+      val facebookNative = FacebookNativeAdAdapter.Builder.with( "FACEBOOK NATIVE AD ID" , Your Adapter)
+            .adItemInterval(5).build()
+        binding.recycleview.adapter = facebookNative
+```
+ 
+  ### For Facebook Native Banner
+ 
+ 
+ ```java
+ 
+      val facebookNativeBanner = FacebookNativeBannerAdsAdapter.Builder.with( "FACEBOOK NATIVE BANNER AD ID" , Your Adapter)
+            .adItemInterval(5).build()
+        binding.recycleview.adapter = facebookNativeBanner
+```
+ 
 
