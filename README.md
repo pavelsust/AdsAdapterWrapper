@@ -1,4 +1,4 @@
-# AdsAdapterWrapper
+# AdsAdapterWrapper [![](https://jitpack.io/v/pavelsust/AdsAdapterWrapper.svg)](https://jitpack.io/#pavelsust/AdsAdapterWrapper)
 
 
 <h4> One of the main earning sources for applications is monetization. The main two monetization network is Admob & Facebook. Sometimes we want to show Native Ads in recycleview so that we can show more Ads and can earn more. But showing Native Ads into recycleview is so hard and need to write bipolar codes. So in this library, I try to make these things easy for developers. Developers can easily integrate Admob and Facebook Native ads as well as Banner Ads into recycleview. 
@@ -12,14 +12,6 @@ The main feature of this library is
   <li>Admob Native Ads</li>
   <li>Admob Banner Ads</li>
 </ul>  
-
-
-
-
-
-[![](https://jitpack.io/v/pavelsust/AdsAdapterWrapper.svg)](https://jitpack.io/#pavelsust/AdsAdapterWrapper)
-
-
 
 
 
