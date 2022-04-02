@@ -37,8 +37,7 @@
                     android:ellipsize="end"
                     android:lines="1"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
+                    android:textColor="@android:color/darker_gray"                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -46,8 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:textColor="@android:color/black"
-                    android:ellipsize="end"
+                    android:textColor="@android:color/darker_gray"                    android:ellipsize="end"
                     android:lines="1"
                     android:textSize="12sp" />
             </LinearLayout>
