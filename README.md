@@ -64,14 +64,13 @@ dependencies {
 
 ```java
 
-public class AppController extends Application {
+class AppController :Application(){
 
-    App app;
-    @Override
-    public void onCreate() {
-        super.onCreate();
-	 AudienceNetworkAds.initialize(this)
-         MobileAds.initialize(this)
+    override fun onCreate() {
+        super.onCreate()
+        MultiDex.install(this)
+        AudienceNetworkAds.initialize(this)
+        MobileAds.initialize(this)
     }
 }
 ```
